@@ -1,0 +1,55 @@
+scalar Date
+
+type User{
+    userId: ID!
+    username: String
+    password: String
+    fullName: String
+    birthdate: Date
+    phone: String
+    email: String
+    enabled: Boolean
+    salary: Int
+    role: Role!
+}
+
+type UserPage {
+    content: [User!]!
+    totalPages: Int!
+    totalElements: Int!
+    pageNumber: Int!
+    pageSize: Int!
+}
+
+#enum Role {
+#    ADMIN
+#    DOCTOR
+#    LEADER_NURSE
+#    NURSE
+#    RECEPTIONIST
+#}
+
+
+# ===============INPUT====================
+input CreateUserInput {
+    username: String
+    password: String
+    rePassword: String
+    fullName: String
+    birthdate: String
+    phone: String
+    email: String
+    salary: Int
+    enable: Boolean
+    roleId: ID
+}
+
+# ================Query =====================
+extend type Query{
+    users(page: Int!, size: Int!, search: String) : UserPage!
+}
+
+extend type Mutation {
+    createUser(input: CreateUserInput!): User!
+}
+
