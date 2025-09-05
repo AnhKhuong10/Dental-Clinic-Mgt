@@ -1,4 +1,4 @@
-package org.vn.detalclinicmgt
+package org.vn.dentalClinicMgt
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

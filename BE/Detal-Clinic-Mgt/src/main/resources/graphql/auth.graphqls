@@ -1,0 +1,26 @@
+type UserLogin {
+    userId: ID!
+    username: String!
+    fullName: String
+    email: String
+    role: String!
+}
+
+type ResLoginDTO {
+    accessToken: String!
+    refreshToken: String!
+    user: UserLogin!
+}
+
+input ReqLoginDTO {
+    username: String!
+    password: String!
+}
+
+type Query {
+    currentUser: UserLogin
+}
+
+type Mutation {
+    login(input: ReqLoginDTO!): ResLoginDTO!
+}
