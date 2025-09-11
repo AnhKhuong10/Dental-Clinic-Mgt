@@ -6,14 +6,42 @@ const router = createRouter({
     return savedPosition || { left: 0, top: 0 }
   },
   routes: [
-    {
+      {
       path: '/',
-      name: 'Ecommerce',
-      component: () => import('../views/Ecommerce.vue'),
+      name: 'Sign-in',
+      component: () => import('../views/Auth/Signin.vue'),
       meta: {
-        title: 'eCommerce Dashboard',
+        title: 'Sign in',
       },
     },
+    {
+      path: '/admin-dashboard',
+      name: 'AdminDashboard',
+      component: () => import('../views/Pages/Admin/AdminDashboard.vue'),
+      meta: {
+        title: 'AdminDashboard',
+        requiresAuth: true,
+        role: "ADMIN"
+      },
+    },
+    {
+      path: '/user-management',
+      name: 'UserManagement',
+      component: () => import('../views/Pages/Admin/UserManagementPage.vue'),
+      meta: {
+        title: 'UserManagement',
+        requiresAuth: true,
+        role: "ADMIN"
+      },
+    },
+    //     {
+    //   path: '/',
+    //   name: 'Ecommerce',
+    //   component: () => import('../views/Ecommerce.vue'),
+    //   meta: {
+    //     title: 'eCommerce Dashboard',
+    //   },
+    // },
     {
       path: '/calendar',
       name: 'Calendar',

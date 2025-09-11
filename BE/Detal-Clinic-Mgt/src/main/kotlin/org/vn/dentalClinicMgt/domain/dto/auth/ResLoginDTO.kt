@@ -2,7 +2,6 @@ package org.vn.dentalClinicMgt.domain.dto.auth
 
 data class ResLoginDTO(
     val accessToken: String,
-    val refreshToken: String,
     val user: UserLogin
 ){
     data class UserLogin(

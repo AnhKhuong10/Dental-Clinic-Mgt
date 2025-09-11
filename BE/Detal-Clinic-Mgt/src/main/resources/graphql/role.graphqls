@@ -2,3 +2,7 @@ type Role{
     roleId: ID!,
     roleName: String,
 }
+
+extend type Query {
+    listRoles : [Role!]!
+}

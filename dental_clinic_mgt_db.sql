@@ -37,6 +37,7 @@ CREATE TABLE users (
     salary INT,
     roleId BIGINT,
     enabled TINYINT DEFAULT 1,
+    refreshToken TEXT,
     FOREIGN KEY (roleId) REFERENCES roles(roleId)
 );
 

@@ -26,4 +26,16 @@ interface UserRepository : JpaRepository<User, Long> {
         @Param("search") search: String?,
         pageable: Pageable,
         ) : Page<User>
+
+    fun findByUsernameAndRefreshToken(username: String, refreshToken: String): User?
+
+    @Query(
+        value = "SELECT * FROM users u WHERE u.username = :username AND BINARY u.refreshToken = :refreshToken",
+        nativeQuery = true
+    )
+    fun getUserByUsernameAndRefreshToken(
+        @Param("refreshToken") refreshToken: String,
+        @Param("username") username: String
+    ): User?
+
 }

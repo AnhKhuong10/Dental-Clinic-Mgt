@@ -34,7 +34,7 @@ class SecurityConfiguration(
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         val whiteList = arrayOf(
-            "/graphql", "/graphiql", "/api/v1/auth/login"
+            "/graphql", "/graphiql"
         )
 
         http.csrf { it.disable() }
@@ -48,6 +48,8 @@ class SecurityConfiguration(
         return http.build()
     }
 
+
+    // Lấy permission từ claim, không cần từ set prefix ROLE_
     @Bean
     fun jwtAuthenticationConverter(): JwtAuthenticationConverter {
         val converter = JwtGrantedAuthoritiesConverter().apply {

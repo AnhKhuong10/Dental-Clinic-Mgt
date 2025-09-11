@@ -1,5 +1,5 @@
 <template>
-  <AdminLayout>
+  <layout>
     <PageBreadcrumb :pageTitle="currentPageTitle" />
     <div class="space-y-5 sm:space-y-6">
       <ComponentCard title="With Light Background">
@@ -57,14 +57,14 @@
         </div>
       </ComponentCard>
     </div>
-  </AdminLayout>
+  </layout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import Badge from '../../components/ui/Badge.vue'
 import PageBreadcrumb from '../../components/common/PageBreadcrumb.vue'
-import AdminLayout from '../../components/layout/AdminLayout.vue'
+import layout from '../../components/layout/layout.vue'
 import ComponentCard from '../../components/common/ComponentCard.vue'
 import { PlusIcon } from '@/icons'
 const currentPageTitle = ref('Badge')
