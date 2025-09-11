@@ -5,7 +5,7 @@ type User{
     username: String
     password: String
     fullName: String
-    birthdate: Date
+    birthdate: String
     phone: String
     email: String
     enabled: Boolean
@@ -19,6 +19,18 @@ type UserPage {
     totalElements: Int!
     pageNumber: Int!
     pageSize: Int!
+}
+
+type UserDTO{
+    userId: ID!
+    username: String
+    fullName: String
+    email: String
+    phone: String
+    birthdate: String
+    salary: Int
+    enabled: Boolean
+    roleName: String!
 }
 
 #enum Role {
@@ -36,20 +48,31 @@ input CreateUserInput {
     password: String
     rePassword: String
     fullName: String
-    birthdate: String
+    birthdate: Date
     phone: String
     email: String
     salary: Int
-    enable: Boolean
+    enabled: Boolean
+    roleId: ID
+}
+
+input UpdateUserInput{
+    userId:ID!
+    fullName: String
+    birthdate: Date
+    phone: String
+    salary: Int
+    enabled: Boolean
     roleId: ID
 }
 
 # ================Query =====================
 extend type Query{
     users(page: Int!, size: Int!, search: String) : UserPage!
+    userByUserId(userId: ID!): UserDTO
 }
 
 extend type Mutation {
-    createUser(input: CreateUserInput!): User!
+    createUser(input: CreateUserInput!): UserDTO!
+    updateUser(input: UpdateUserInput!): UserDTO!
 }
-

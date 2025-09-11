@@ -27,7 +27,7 @@ data class CreateUserInput(
     @field:Min(value = 0, message = "Salary must be positive")
     val salary: Int?,
 
-    val enable: Boolean = true,
+    val enabled: Boolean = true,
 
     @field:NotNull(message = "RoleId is required")
     val roleId: Long

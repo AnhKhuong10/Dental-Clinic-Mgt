@@ -1,5 +1,5 @@
 <template>
-  <AdminLayout>
+  <layout>
     <PageBreadcrumb :pageTitle="currentPageTitle" />
     <div class="space-y-5 sm:space-y-6">
       <ComponentCard title="Primary Button">
@@ -39,13 +39,13 @@
         </div>
       </ComponentCard>
     </div>
-  </AdminLayout>
+  </layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import PageBreadcrumb from '@/components/common/PageBreadcrumb.vue'
-import AdminLayout from '@/components/layout/AdminLayout.vue'
+import layout from '@/components/layout/layout.vue'
 import ComponentCard from '@/components/common/ComponentCard.vue'
 import Button from '@/components/ui/Button.vue'
 import { BoxIcon } from '@/icons'

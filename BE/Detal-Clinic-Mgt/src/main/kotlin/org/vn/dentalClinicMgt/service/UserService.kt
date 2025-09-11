@@ -9,9 +9,14 @@ import org.vn.dentalClinicMgt.domain.entity.User
 
 interface UserService {
     fun handleGetUserByUsername(username: String): User
+
     fun validateUserLogin(username: String, password: String): User
+    fun updateUserToken(userId: Long, refreshToken: String?)
+    fun getUserByUsernameAndRefreshToken(username: String, refreshToken: String): User?
+
     fun getUsers(): List<UserDTO>
     fun createUser(input: CreateUserInput): UserDTO
     fun updateUser(input: UpdateUserInput): UserDTO
     fun listUsers(search: String?, pageable: Pageable): Page<User>
+    fun findUserByUserId(id: Long): UserDTO?
 }

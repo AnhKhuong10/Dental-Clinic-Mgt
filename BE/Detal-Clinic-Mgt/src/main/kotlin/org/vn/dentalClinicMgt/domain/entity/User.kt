@@ -1,5 +1,6 @@
 package org.vn.dentalClinicMgt.domain.entity
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.persistence.*
 import java.time.LocalDate
 
@@ -13,15 +14,17 @@ class User(
     @Column(nullable = false, unique = true)
     val username: String,
 
-    val fullName: String?,
+    var fullName: String?,
     @Column(nullable = false)
-    val password: String,
-    val birthdate: LocalDate,
-    val phone: String?,
+    var password: String,
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    var birthdate: LocalDate,
+    var phone: String?,
     val email: String?,
-    val salary: Int?,
-    val enabled: Boolean = true,
+    var salary: Int?,
+    var enabled: Boolean = true,
+    var refreshToken: String? = null,
 
     @ManyToOne @JoinColumn(name = "roleId")
-    val role: Role
+    var role: Role
 )

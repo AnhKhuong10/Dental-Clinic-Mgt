@@ -15,6 +15,9 @@ import org.vn.dentalClinicMgt.service.UserService
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import java.util.*
+import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
+import com.nimbusds.jose.util.Base64
 
 @Component
 class SecurityUtil(
@@ -45,6 +48,9 @@ class SecurityUtil(
 
     @Value("\${application.security.jwt.refresh-token-validity-in-seconds}")
     private var refreshTokenExpiration: Long = 0
+
+    @Value("\${application.security.jwt.base64-secret}")
+    private var jwtKey: String? = null
 
     fun createAccessToken(username: String, dto: ResLoginDTO.UserLogin): String {
         val now = Instant.now()
@@ -90,4 +96,24 @@ class SecurityUtil(
         val jwsHeader = JwsHeader.with(JWT_ALGORITHM).build()
         return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims)).tokenValue
     }
+
+    private fun getSecretKey(): SecretKey {
+        val keyBytes = Base64.from(jwtKey).decode()
+        return SecretKeySpec(keyBytes, 0, keyBytes.size, JWT_ALGORITHM.name)
+    }
+
+
+    fun checkValidRefreshToken(token: String): Jwt {
+        //khởi tạo một bộ giải mã JWT
+        val jwtDecoder = NimbusJwtDecoder.withSecretKey(getSecretKey())
+            .macAlgorithm(SecurityUtil.JWT_ALGORITHM)
+            .build()
+        return try {
+            jwtDecoder.decode(token)
+        } catch (e: Exception) {
+            println(">>> Refresh Token error: ${e.message}")
+            throw e
+        }
+    }
+
 }
