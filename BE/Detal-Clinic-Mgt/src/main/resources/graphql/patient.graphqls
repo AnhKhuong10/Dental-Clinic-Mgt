@@ -1,0 +1,79 @@
+
+enum GenderEnum {
+    MALE, FEMALE
+}
+
+enum PatientStatus {
+    NOT_TREATMENT,
+    TREATING,
+    COMPLETED,
+}
+
+type Patient{
+    patientId: ID!
+    patientName: String
+    birthdate: String
+    gender: GenderEnum
+    address: String
+    phone: String
+    email: String
+    bodyPrehistory: String
+    teethPrehistory: String
+    status: PatientStatus
+}
+
+type PatientDTO{
+    patientId: ID!
+    patientName: String
+    birthdate: String
+    gender: GenderEnum
+    address: String
+    phone: String
+    email: String
+    bodyPrehistory: String
+    teethPrehistory: String
+    status: PatientStatus
+    isDeleted: Boolean
+}
+
+type PatientPage {
+    content: [Patient!]!
+    totalPages: Int!
+    totalElements: Int!
+    pageNumber: Int!
+    pageSize: Int!
+}
+
+input PatientCreateInput{
+    patientName: String
+    birthdate: Date!
+    gender: GenderEnum
+    address: String
+    phone: String
+    email: String
+    bodyPrehistory: String
+    teethPrehistory: String
+}
+
+input PatientUpdateInput{
+    patientId: ID!
+    patientName: String
+    birthdate: Date!
+    gender: GenderEnum
+    address: String
+    phone: String
+    email: String
+    bodyPrehistory: String
+    teethPrehistory: String
+    status : PatientStatus
+}
+
+extend type Query{
+    getPatientPage(page: Int!, size: Int!, search: String, gender: GenderEnum, status: PatientStatus):PatientPage!
+    getPatientDetail(id: ID!): PatientDTO
+}
+
+extend type Mutation {
+    createPatient(input: PatientCreateInput!): PatientDTO
+    updatePatient(input: PatientUpdateInput!): PatientDTO
+}

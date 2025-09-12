@@ -1,6 +1,8 @@
 package org.vn.dentalClinicMgt.domain.entity
 
 import jakarta.persistence.*
+import org.vn.dentalClinicMgt.utils.constants.GenderEnum
+import org.vn.dentalClinicMgt.utils.constants.PatientStatus
 import java.time.LocalDate
 
 @Entity
@@ -10,15 +12,17 @@ data class Patient(
     val patientId: Long = 0,
 
     @Column(nullable = false)
-    val patientName: String,
+    var patientName: String,
 
-    val birthdate: LocalDate?,
-    val gender: Boolean?,
-    val address: String?,
-    val phone: String?,
-    val email: String?,
-    val bodyPrehistory: String?,
-    val teethPrehistory: String?,
-    val status: Int = 1,
-    val isDeleted: Boolean = false
+    var birthdate: LocalDate?,
+    @Enumerated(EnumType.STRING) // Lưu enum dạng text
+    var gender: GenderEnum? = null,
+    var address: String?,
+    var phone: String?,
+    var email: String?,
+    var bodyPrehistory: String?,
+    var teethPrehistory: String?,
+    @Enumerated(EnumType.STRING)
+    var status: PatientStatus,
+    var isDeleted: Boolean = false
 )

@@ -1,0 +1,31 @@
+
+type CategoryService{
+    categoryServiceId: ID!
+    categoryServiceName: String
+}
+
+type CategoryServicePage{
+    content: [CategoryService!]!
+    totalPages: Int!
+    totalElements: Int!
+    pageNumber: Int!
+    pageSize: Int!
+}
+
+input CategoryServiceCreateInput{
+    categoryServiceName: String
+}
+
+input CategoryServiceUpdateInput{
+    categoryServiceId: ID!
+    categoryServiceName: String
+}
+
+extend type Query {
+    getCategoryServicePage(page: Int!, size:Int!, search: String): CategoryServicePage!
+}
+
+extend type Mutation {
+    createCategoryService(input: CategoryServiceCreateInput!): CategoryService
+    updateCategoryService(input: CategoryServiceUpdateInput!): CategoryService
+}
