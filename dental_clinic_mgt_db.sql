@@ -48,13 +48,13 @@ CREATE TABLE patients (
     patientId BIGINT AUTO_INCREMENT PRIMARY KEY,
     patientName VARCHAR(100) NOT NULL,
     birthdate DATE,
-    gender TINYINT(1),
+    gender VARCHAR(255),
     address VARCHAR(255),
     phone VARCHAR(40),
     email VARCHAR(100),
     bodyPrehistory VARCHAR(255),
     teethPrehistory VARCHAR(255),
-    status INT DEFAULT 1,
+    status VARCHAR(255),
     isDeleted TINYINT DEFAULT 0
 );
 

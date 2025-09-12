@@ -1,0 +1,47 @@
+type Service{
+    serviceId: ID!
+    serviceName: String
+    price: Int
+    marketPrice: Int
+    categoryService: CategoryService
+}
+
+type ServicePage{
+    content: [Service!]!
+    totalPages: Int
+    totalElements: Int
+    pageSize: Int
+    pageNumber: Int
+}
+
+type ServiceDTO{
+    serviceId: ID!
+    serviceName: String
+    price: Int
+    marketPrice: Int
+    categoryServiceName: String
+}
+
+input ServiceCreateInput{
+    serviceName: String
+    price: Int
+    marketPrice: Int
+    categoryServiceId: ID
+}
+
+input ServiceUpdateInput{
+    serviceId: ID!
+    serviceName: String
+    price: Int
+    marketPrice: Int
+    categoryServiceId: ID
+}
+
+extend type Query{
+    getServicePage(page: Int!, size: Int!, search: String, minPrice: Int, maxPrice: Int): ServicePage!
+}
+
+extend type Mutation {
+    createService(input: ServiceCreateInput): ServiceDTO
+    updateService(input: ServiceUpdateInput): ServiceDTO
+}

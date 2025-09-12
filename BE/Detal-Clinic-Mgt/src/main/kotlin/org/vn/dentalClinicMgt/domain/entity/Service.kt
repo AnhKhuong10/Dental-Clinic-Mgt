@@ -9,11 +9,11 @@ data class Service(
     val serviceId: Long = 0,
 
     @Column(nullable = false)
-    val serviceName: String,
+    var serviceName: String,
 
-    val price: Int,
-    val marketPrice: Int?,
+    var price: Int,
+    var marketPrice: Int?,
 
     @ManyToOne @JoinColumn(name = "categoryServiceId")
-    val categoryService: CategoryService? = null
+    var categoryService: CategoryService
 )

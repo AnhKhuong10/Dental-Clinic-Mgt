@@ -2,9 +2,12 @@ package org.vn.dentalClinicMgt.utils.exception
 
 import graphql.GraphQLError
 import graphql.GraphqlErrorBuilder
+import graphql.execution.NonNullableValueCoercedAsNullException
 import graphql.schema.DataFetchingEnvironment
 import jakarta.validation.ConstraintViolationException
 import org.springframework.graphql.execution.DataFetcherExceptionResolverAdapter
+import org.springframework.security.authorization.AuthorizationDeniedException
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.MethodArgumentNotValidException
 
@@ -66,6 +69,46 @@ class GraphQLExceptionHandler : DataFetcherExceptionResolverAdapter() {
                     .build()
             }
 
+            // Input null cho tham số NonNull
+            is NonNullableValueCoercedAsNullException -> {
+                GraphqlErrorBuilder.newError(env)
+                    .message("Input must not be null")
+                    .extensions(
+                        mapOf(
+                            "http_code" to 400,
+                            "http_message" to "BAD_REQUEST",
+                            "error_code" to "NULL_INPUT"
+                        )
+                    )
+                    .build()
+            }
+
+            is AuthorizationDeniedException -> {
+                val auth = SecurityContextHolder.getContext().authentication
+                if (auth == null || !auth.isAuthenticated) {
+                    GraphqlErrorBuilder.newError(env)
+                        .message("Bạn cần đăng nhập trước khi thực hiện hành động này!")
+                        .extensions(
+                            mapOf(
+                                "http_code" to 401,
+                                "http_message" to "UNAUTHORIZED",
+                                "error_code" to "UNAUTHENTICATED"
+                            )
+                        )
+                        .build()
+                } else {
+                    GraphqlErrorBuilder.newError(env)
+                        .message("Bạn không có quyền thực hiện hành động này!")
+                        .extensions(
+                            mapOf(
+                                "http_code" to 403,
+                                "http_message" to "FORBIDDEN",
+                                "error_code" to "ACCESS_DENIED"
+                            )
+                        )
+                        .build()
+                }
+            }
 
             else -> {
                 // In stacktrace ra console để debug
