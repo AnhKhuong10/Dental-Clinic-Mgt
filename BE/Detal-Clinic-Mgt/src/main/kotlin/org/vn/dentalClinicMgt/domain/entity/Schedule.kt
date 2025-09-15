@@ -1,6 +1,7 @@
 package org.vn.dentalClinicMgt.domain.entity
 
 import jakarta.persistence.*
+import org.vn.dentalClinicMgt.utils.constants.ScheduleStatus
 import java.time.LocalDate
 
 @Entity
@@ -10,9 +11,11 @@ data class Schedule(
     val scheduleId: Long = 0,
 
     @ManyToOne @JoinColumn(name = "patientId")
-    val patient: Patient? = null,
+    var patient: Patient,
 
-    val date: LocalDate?,
-    val status: String?,
-    val booked: Boolean = false
+    var date: LocalDate,
+
+    @Enumerated(EnumType.STRING)
+    var status: ScheduleStatus,
+    var booked: Boolean = false
 )
