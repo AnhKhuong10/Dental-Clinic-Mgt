@@ -58,6 +58,17 @@ class ScheduleServiceImpl(
         return scheduleRepository.save(schedule).toScheduleDTO()
     }
 
+    override fun joinToWaitingRoom(scheduleId: Long): ScheduleDTO {
+        val schedule = scheduleRepository.findById(scheduleId)
+            .orElseThrow{ BusinessException(ErrorCode.NOT_FOUND, "Schedule with id $scheduleId not found") }
+
+        if(schedule.status != ScheduleStatus.BOOKING && schedule.booked){
+            throw BusinessException(ErrorCode.BAD_REQUEST, "Schedules is not booked, cannot join waiting room")
+        }
+        schedule.status = ScheduleStatus.WAITING
+        return scheduleRepository.save(schedule).toScheduleDTO()
+    }
+
     override fun joinSchedule(scheduleId: Long): ScheduleDTO {
         val schedule = scheduleRepository.findById(scheduleId)
             .orElseThrow{ BusinessException(ErrorCode.NOT_FOUND, "Schedule with id $scheduleId not found") }
@@ -85,6 +96,10 @@ class ScheduleServiceImpl(
     override fun cancelSchedule(scheduleId: Long): ScheduleDTO {
         val schedule = scheduleRepository.findById(scheduleId)
             .orElseThrow{ BusinessException(ErrorCode.NOT_FOUND, "Schedule with id $scheduleId not found") }
+
+        if (schedule.status == ScheduleStatus.COMPLETED) {
+            throw BusinessException(ErrorCode.BAD_REQUEST, "Schedule completed, cannot cancel the schedule")
+        }
 
         schedule.status = ScheduleStatus.CANCELLED
         return scheduleRepository.save(schedule).toScheduleDTO()

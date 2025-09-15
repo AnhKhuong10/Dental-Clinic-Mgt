@@ -9,5 +9,5 @@ data class Treatment(
     val treatmentId: Long = 0,
 
     @ManyToOne @JoinColumn(name = "patientId")
-    val patient: Patient? = null
+    val patient: Patient
 )

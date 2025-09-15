@@ -3,7 +3,7 @@ package org.vn.dentalClinicMgt.domain.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "treatment_service_map")
+@Table(name = "treatmentservicemap")
 data class TreatmentServiceMap(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val treatmentServiceMapId: Long = 0,

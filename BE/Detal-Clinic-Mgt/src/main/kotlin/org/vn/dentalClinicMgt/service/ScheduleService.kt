@@ -18,9 +18,12 @@ interface ScheduleService {
 
     fun updateSchedule(input: ScheduleUpdateInput): ScheduleDTO
 
+    fun joinToWaitingRoom(scheduleId: Long): ScheduleDTO
+
     fun joinSchedule(scheduleId: Long): ScheduleDTO   // WAITING -> TREATING
 
     fun completeSchedule(scheduleId: Long): ScheduleDTO  // TREATING -> COMPLETED
 
     fun cancelSchedule(scheduleId: Long): ScheduleDTO    // bất kỳ -> CANCELLED
+
 }

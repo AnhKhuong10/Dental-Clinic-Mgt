@@ -71,25 +71,6 @@ CREATE TABLE schedule (
 );
 
 -- =====================
--- PATIENT RECORDS
--- =====================
-CREATE TABLE patientRecords (
-    patientRecordId BIGINT AUTO_INCREMENT PRIMARY KEY,
-    reason VARCHAR(255),
-    diagnostic VARCHAR(255),
-    causal VARCHAR(255),
-    date DATE,
-    treatment VARCHAR(255),
-    marrowRecord VARCHAR(255),
-    debit INT,
-    note VARCHAR(255),
-    credit INT,
-    userId BIGINT,
-    prescription TEXT,
-    FOREIGN KEY (userId) REFERENCES users(userId)
-);
-
--- =====================
 -- TREATMENTS
 -- =====================
 CREATE TABLE treatments (
@@ -115,12 +96,32 @@ CREATE TABLE services (
     FOREIGN KEY (categoryServiceId) REFERENCES categoryService(categoryServiceId)
 );
 
+-- =====================
+-- PATIENT RECORDS
+-- =====================
+CREATE TABLE patientRecords (
+    patientRecordId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    reason VARCHAR(255),
+    diagnostic VARCHAR(255),
+    causal VARCHAR(255),
+    date DATE,
+    treatmentDescription VARCHAR(255),
+    marrowRecord VARCHAR(255),
+    debit INT,
+    note VARCHAR(255),
+    prescription TEXT,
+	treatmentId BIGINT,
+    userId BIGINT,
+    FOREIGN KEY (treatmentId) REFERENCES treatments(treatmentId),
+	FOREIGN KEY (userId) REFERENCES users(userId)
+);
+
 -- mapping patient record ↔ service
 CREATE TABLE patientRecordServiceMap (
     patientRecordServiceMapId BIGINT AUTO_INCREMENT PRIMARY KEY,
     patientRecordId BIGINT,
     serviceId BIGINT,
-    status INT,
+    status VARCHAR(255),
     FOREIGN KEY (patientRecordId) REFERENCES patientRecords(patientRecordId),
     FOREIGN KEY (serviceId) REFERENCES services(serviceId)
 );

@@ -28,7 +28,6 @@ class TreatmentServiceImpl(
         val patient = patientRepository.findById(input.patientId)
             .orElseThrow { BusinessException(ErrorCode.NOT_FOUND, "Patient ${input.patientId} not found") }
 
-        // Tạo treatment
         val treatment = treatmentRepository.save(
             Treatment(patient = patient)
         )
@@ -50,17 +49,38 @@ class TreatmentServiceImpl(
         }
 
         return TreatmentDTO(
-            id = treatment.treatmentId,
+            treatmentId = treatment.treatmentId,
             patientId = patient.patientId,
             services = serviceMaps
         )
     }
 
-    fun TreatmentServiceMap.toDTO() = TreatmentServiceMapDTO(
-        id = this.treatmentServiceMapId,
+    override fun getTreatmentById(id: Long): TreatmentDTO {
+        val treatment = treatmentRepository.findById(id)
+            .orElseThrow { BusinessException(ErrorCode.NOT_FOUND,"Treatment not found") }
+        val serviceMaps = treatmentServiceMapRepository.findByTreatmentId(treatment.treatmentId)
+        return treatment.toDTO(serviceMaps)
+    }
+
+    override fun getTreatmentsByPatient(patientId: Long): List<TreatmentDTO> {
+        val treatments = treatmentRepository.findByPatientId(patientId)
+        return treatments.map { t ->
+            val serviceMaps = treatmentServiceMapRepository.findByTreatmentId(t.treatmentId)
+            t.toDTO(serviceMaps)
+        }
+    }
+
+    private fun TreatmentServiceMap.toDTO() = TreatmentServiceMapDTO(
+        treatmentServiceMapId = this.treatmentServiceMapId,
         serviceName = this.service?.serviceName ?: "",
         price = this.currentPrice,
         discount = this.discount?:0
+    )
+
+    private fun Treatment.toDTO(serviceMaps: List<TreatmentServiceMap>) = TreatmentDTO(
+        treatmentId = this.treatmentId,
+        patientId = this.patient.patientId,
+        services = serviceMaps.map { it.toDTO() }
     )
 
 

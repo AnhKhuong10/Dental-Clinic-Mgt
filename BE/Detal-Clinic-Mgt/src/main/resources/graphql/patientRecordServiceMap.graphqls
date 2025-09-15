@@ -1,0 +1,47 @@
+
+enum PatientRecordServiceStatus {
+    PENDING
+    IN_PROGRESS
+    DONE
+    CANCELLED
+}
+
+type PatientRecordServiceMap{
+    patientRecordServiceMapId: ID!
+    patientRecord: PatientRecord
+    service: Service
+    status: PatientRecordServiceStatus
+}
+
+type PatientRecordServiceMapDTO{
+    serviceName: String
+    servicePrice: Int
+    status: PatientRecordServiceStatus
+}
+
+type PatientRecordServiceMapPage{
+    content: [PatientRecordServiceMapDTO!]!
+    totalPages: Int
+    totalElements: Int
+    pageNumber: Int
+    pageSize: Int
+}
+
+input PatientRecordServiceMapCreateInput{
+    patientRecordId: ID,
+    serviceIds: [ID!]!
+}
+
+extend type Query {
+    getPatientRecordServiceMapPage(page: Int!, size:Int!): PatientRecordServiceMapPage
+}
+
+extend type Mutation {
+    createPatientRecordService(input: PatientRecordServiceMapCreateInput): [PatientRecordServiceMapDTO]
+    makeServiceAsInProgress(id: ID): PatientRecordServiceMapDTO
+    makeServiceAsDone(id: ID): PatientRecordServiceMapDTO
+    makeServiceAsCancelled(id: ID): PatientRecordServiceMapDTO
+}
+
+
+

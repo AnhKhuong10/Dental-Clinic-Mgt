@@ -39,7 +39,19 @@ INSERT INTO permission (permissionId, permissionName) VALUES
 (11, 'CATEGORYSERVICE_UPDATE'),
 (12, 'SERVICE_VIEW'),
 (13, 'SERVICE_CREATE'),
-(14, 'SERVICE_UPDATE');
+(14, 'SERVICE_UPDATE'),
+(15, 'TREATMENT_VIEW_DETTAIL'),
+(16, 'TREATMENT_BY_PATIENT_VIEW'),
+(17, 'TREATMENT_CREATE'),
+(18, 'PATIENT_RECORD_VIEW'),
+(19, 'PATIENT_RECORD_CREATE'),
+(20, 'PATIENT_RECORD_UPDATE'),
+(21, 'PATIENT_RECORD_SERVICE_VIEW'),
+(22, 'PATIENT_RECORD_SERVICE_CREATE'),
+(23, 'PATIENT_RECORD_SERVICE_INPROGRESS'),
+(24, 'PATIENT_RECORD_SERVICE_DONE'),
+(25, 'PATIENT_RECORD_SERVICE_CANCELLED');
+
 
 -- Map ADMIN -> full quyền
 INSERT INTO rolePermissionMap (roleId, permissionId) VALUES
@@ -57,10 +69,32 @@ INSERT INTO rolePermissionMap (roleId, permissionId) VALUES
 (1, 12), -- ADMIN -> SERVICE_VIEW
 (1, 13), -- ADMIN -> SERVICE_CREATE
 (1, 14), -- ADMIN -> SERVICE_UPDATE
+(1, 15), -- ADMIN -> TREATMENT_VIEW_DETTAIL
+(1, 16), -- ADMIN -> TREATMENT_BY_PATIENT_VIEW
+(1, 17), -- ADMIN -> TREATMENT_CREATE
+(1, 18), -- ADMIN -> PATIENT_RECORD_VIEW
+(1, 19), -- ADMIN -> PATIENT_RECORD_CREATE
+(1, 20), -- ADMIN -> PATIENT_RECORD_UPDATE
+(1, 21), -- ADMIN -> PATIENT_RECORD_SERVICE_VIEW
+(1, 22), -- ADMIN -> PATIENT_RECORD_SERVICE_CREATE
+(1, 23), -- ADMIN -> PATIENT_RECORD_SERVICE_INPROGRESS
+(1, 24), -- ADMIN -> PATIENT_RECORD_SERVICE_DONE
+(1, 25), -- ADMIN -> PATIENT_RECORD_SERVICE_CANCELLED
 
 (2, 5), -- DOCTOR -> PATIENT_VIEW
 (2, 9), -- DOCTOR -> CATEGORYSERVICE_VIEW
 (2, 12), -- DOCTOR -> SERVICE_VIEW
+(2, 15), -- DOCTOR -> TREATMENT_VIEW_DETTAIL
+(2, 16), -- DOCTOR -> TREATMENT_BY_PATIENT_VIEW
+(2, 17), -- DOCTOR -> TREATMENT_CREATE
+(2, 18), -- DOCTOR -> PATIENT_RECORD_VIEW
+(2, 19), -- DOCTOR -> PATIENT_RECORD_CREATE
+(2, 20), -- DOCTOR -> PATIENT_RECORD_UPDATE
+(2, 21), -- DOCTOR -> PATIENT_RECORD_SERVICE_VIEW
+(2, 22), -- DOCTOR -> PATIENT_RECORD_SERVICE_CREATE
+(2, 23), -- DOCTOR -> PATIENT_RECORD_SERVICE_INPROGRESS
+(2, 24), -- DOCTOR -> PATIENT_RECORD_SERVICE_DONE
+(2, 25), -- DOCTOR -> PATIENT_RECORD_SERVICE_CANCELLED
 
 (3, 5), -- LEADER_NURSE -> PATIENT_VIEW
 (3, 9), -- LEADER_NURSE -> CATEGORYSERVICE_VIEW
@@ -75,7 +109,10 @@ INSERT INTO rolePermissionMap (roleId, permissionId) VALUES
 (5, 7), -- RECEPTIONIST -> PATIENT_UPDATE
 (5, 8), -- RECEPTIONIST -> PATIENT_UPDATE
 (5, 9), -- RECEPTIONIST -> CATEGORYSERVICE_VIEW
-(5, 12); -- RECEPTIONIST -> SERVICE_VIEW
+(5, 12), -- RECEPTIONIST -> SERVICE_VIEW
+(5, 15), -- RECEPTIONIST -> TREATMENT_VIEW_DETTAIL
+(5, 16), -- RECEPTIONIST -> TREATMENT_BY_PATIENT_VIEW
+(5, 17); -- RECEPTIONIST -> TREATMENT_CREATE
 
 INSERT INTO patients (patientName, birthdate, gender, address, phone, email, bodyPrehistory, teethPrehistory, status, isDeleted) VALUES
 ('Nguyen Van A', '1990-01-10', 'MALE', 'Hanoi', '0901111111', 'vana@gmail.com', 'None', 'Cavity', 'NOT_TREATMENT', 0),
@@ -122,7 +159,31 @@ INSERT INTO services (serviceName, price, marketPrice, categoryServiceId) VALUES
 ('Dental Implant',              15000000, 16000000, 7),
 ('Dental Crown (Porcelain)',     3000000, 3500000, 7);
 
+INSERT INTO treatments (treatmentId, patientId)
+VALUES 
+(1, 1), 
+(2, 1), 
+(3, 2);
 
+INSERT INTO treatmentservicemap (treatmentId, serviceId, currentPrice, discount, startPatientRecordId)
+VALUES
+(1, 1, 500000, 0, NULL),  
+(1, 3, 200000, 0, NULL),  
+(1, 4, 15000000, 0, NULL),
+(2, 2, 300000, 0, NULL); 
+
+INSERT INTO patientrecords 
+(patientRecordId, reason, diagnostic, causal, date, treatmentDescription, marrowRecord, debit, note, prescription, treatmentId, userId) 
+VALUES
+(1, 'Đau răng', 'Sâu răng', 'Ăn ngọt', '2025-09-01', 'lâu dài', 'không',  0, 'Cần trám răng', 'Thuốc giảm đau', 1, 1),
+(2, 'Niềng răng', 'Lệch khớp cắn', 'Thói quen xấu', '2025-09-10', 'dài lâu', 'không', 0, 'Bắt đầu niềng', 'Không', 1, 1);
+
+
+INSERT INTO patientrecordservicemap
+(patientRecordServiceMapId, patientRecordId, serviceId, status)
+VALUES
+(1, 1, 1, 'PENDING'),
+(2, 1, 2, 'IN_PROGRESS' );
 
 
 
