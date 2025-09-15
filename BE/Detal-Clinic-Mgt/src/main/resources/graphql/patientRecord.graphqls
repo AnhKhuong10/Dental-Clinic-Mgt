@@ -1,0 +1,75 @@
+
+scalar Date
+
+type PatientRecord{
+    patientRecordId: ID!
+    reason: String
+    diagnostic: String
+    causal: String
+    date: Date
+    treatmentDescription: String
+    debit: Int
+    note: String
+    prescription: String
+    treatment: Treatment
+    user: User
+}
+
+type PatientRecordPage{
+    content: [PatientRecordDTO!]!
+    totalPages: Int,
+    totalElements: Int,
+    pageNumber: Int,
+    pageSize: Int
+}
+
+type PatientRecordDTO{
+    reason: String
+    diagnostic: String
+    causal: String
+    date: Date
+    treatmentDescription: String
+    marrowRecord: String
+    debit: Int
+    note: String
+    doctorName: String
+    prescription: String
+}
+
+input PatientRecordCreateInput{
+    reason: String
+    diagnostic: String
+    causal: String
+    date: Date
+    treatmentDescription: String
+    marrowRecord: String
+    debit: Int
+    note: String
+    treatmentId: ID
+    userId: ID
+    prescription: String
+}
+
+input PatientRecordUpdateInput{
+    patientRecordId: ID
+    reason: String
+    diagnostic: String
+    causal: String
+    date: Date
+    treatmentDescription: String
+    debit: Int
+    note: String
+    treatmentId: ID,
+    userId: ID,
+    prescription: String
+}
+
+extend type Query{
+    getPatientRecordPage(page: Int!, size: Int!, search: String, fromDate:Date, toDate: Date): PatientRecordPage!
+
+}
+
+extend type Mutation{
+    createPatientRecord(input: PatientRecordCreateInput) : PatientRecordDTO
+    updatePatientRecord(input: PatientRecordUpdateInput) : PatientRecordDTO
+}

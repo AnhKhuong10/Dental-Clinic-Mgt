@@ -24,5 +24,9 @@ data class Patient(
     var teethPrehistory: String?,
     @Enumerated(EnumType.STRING)
     var status: PatientStatus,
-    var isDeleted: Boolean = false
+    var isDeleted: Boolean = false,
+
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    val treatments: MutableList<Treatment> = mutableListOf(),
+
 )

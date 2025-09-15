@@ -7,4 +7,8 @@ import org.vn.dentalClinicMgt.domain.entity.Treatment
 interface TreatmentService {
 
     fun createTreatment(input: CreateTreatmentInput): TreatmentDTO
+
+    fun getTreatmentById(id: Long): TreatmentDTO
+
+    fun getTreatmentsByPatient(patientId: Long): List<TreatmentDTO>
 }

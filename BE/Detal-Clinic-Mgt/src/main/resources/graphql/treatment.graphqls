@@ -1,0 +1,41 @@
+type Treatment {
+    treatmentId: ID!
+    patientId: ID!
+    services: [TreatmentServiceMap!]!
+}
+
+type TreatmentServiceMap {
+    treatmentServiceMapId: ID!
+    serviceId: ID!
+    serviceName: String!
+    currentPrice: Int!
+    discount: Int
+    startPatientRecordId: ID
+}
+
+type TreatmentServiceMapDTO{
+    treatmentServiceMapId: ID!,
+    serviceName: String,
+    price: Int,
+    discount: Int,
+}
+
+type TreatmentDTO{
+    treatmentId: ID!
+    patientId: ID!
+    services: [TreatmentServiceMapDTO!]!
+}
+
+input CreateTreatmentInput {
+    patientId: ID!
+    serviceIds: [ID!]
+}
+
+extend type Query {
+    getTreatmentById(treatmentId: ID!): TreatmentDTO
+    getTreatmentsByPatient(patientId: ID!): [TreatmentDTO!]!
+}
+
+extend type Mutation {
+    createTreatment(input: CreateTreatmentInput!): TreatmentDTO!
+}

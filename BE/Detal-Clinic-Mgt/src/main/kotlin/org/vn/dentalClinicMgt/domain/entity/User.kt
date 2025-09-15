@@ -14,7 +14,7 @@ class User(
     @Column(nullable = false, unique = true)
     val username: String,
 
-    var fullName: String?,
+    var fullName: String,
     @Column(nullable = false)
     var password: String,
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")

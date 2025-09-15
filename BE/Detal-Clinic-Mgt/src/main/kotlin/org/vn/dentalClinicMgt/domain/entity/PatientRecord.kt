@@ -4,22 +4,23 @@ import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
-@Table(name = "patient_records")
+@Table(name = "patientrecords")
 data class PatientRecord(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val patientRecordId: Long = 0,
 
-    val reason: String?,
-    val diagnostic: String?,
-    val causal: String?,
-    val date: LocalDate?,
-    val treatment: String?,
-    val marrowRecord: String?,
-    val debit: Int?,
-    val note: String?,
-    val credit: Int?,
-    val prescription: String?,
+    var reason: String,
+    var diagnostic: String,
+    var causal: String,
+    var date: LocalDate,
+    var treatmentDescription: String,
+    var marrowRecord: String,
+    var debit: Int,
+    var note: String,
+    var prescription: String,
 
+    @ManyToOne @JoinColumn(name = "treatmentId")
+    var treatment: Treatment,
     @ManyToOne @JoinColumn(name = "userId")
-    val user: User? = null
+    var user: User
 )
