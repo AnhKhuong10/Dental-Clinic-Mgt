@@ -1,0 +1,56 @@
+type Schedule{
+    scheduleId: ID,
+    patient: Patient,
+    date: Date,
+    status: ScheduleStatus
+}
+
+enum ScheduleStatus{
+    BOOKING,
+    WAITING,
+    TREATING,
+    COMPLETED,
+    CANCELLED,
+}
+
+type SchedulePage{
+    content: [Schedule!]!,
+    totalPages: Int,
+    totalElements: Int,
+    pageSize: Int,
+    pageNumber: Int
+}
+
+type ScheduleDTO{
+    scheduleId: ID,
+    patientName: String,
+    date: Date,
+    status: ScheduleStatus
+}
+
+input ScheduleCreateInput{
+    patientId: ID,
+    date: Date,
+    status: ScheduleStatus,
+    booked: Boolean
+}
+
+input ScheduleUpdateInput{
+    scheduleId: ID,
+    patientId: ID,
+    date: Date,
+    status: ScheduleStatus,
+    booked: Boolean
+}
+
+extend type Query {
+    getSchedulePage(page: Int, size: Int, search: String, fromDate:Date, toDate: Date, status: ScheduleStatus): SchedulePage!
+}
+
+extend type Mutation {
+    createSchedule(input: ScheduleCreateInput): ScheduleDTO
+    updateSchedule(input: ScheduleUpdateInput): ScheduleDTO
+    joinSchedule(scheduleId: ID): ScheduleDTO
+    completeSchedule(scheduleId: ID): ScheduleDTO
+    cancelSchedule(scheduleId: ID): ScheduleDTO
+}
