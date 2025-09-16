@@ -1,0 +1,50 @@
+
+type Material{
+    materialId: ID,
+    materialName: String,
+    unit: String,
+    amount: Int,
+    price: Int
+}
+
+type MaterialDTO{
+    materialId: ID,
+    materialName: String,
+    unit: String,
+    amount: Int,
+    price: Int,
+    totalPrice: Int,
+}
+
+type MaterialPage{
+    content: [MaterialDTO!]!
+    totalPages: Int,
+    totalElements: Int,
+    pageSize: Int,
+    pageNumber: Int
+}
+
+input MaterialCreateInput{
+    materialName: String,
+    unit: String,
+    amount: Int,
+    price: Int
+}
+
+input MaterialUpdateInput{
+    materialId: ID,
+    materialName: String,
+    unit: String,
+    amount: Int,
+    price: Int
+}
+
+extend type Query {
+    getMaterialPage(page: Int!, size: Int!, search: String): MaterialPage
+    getMaterialDetail(id: ID): MaterialDTO
+}
+
+extend type Mutation{
+    createMaterial(input: MaterialCreateInput): MaterialDTO
+    updateMaterial(input: MaterialUpdateInput): MaterialDTO
+}
