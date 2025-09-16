@@ -9,15 +9,15 @@ data class Specimen(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val specimenId: Long = 0,
 
-    val specimenName: String?,
-    val receiveDate: LocalDate?,
-    val deliveryDate: LocalDate?,
-    val amount: Int?,
-    val price: Int?,
+    var specimenName: String,
+    var receiveDate: LocalDate,
+    var deliveryDate: LocalDate,
+    var amount: Int,
+    var price: Int,
 
     @ManyToOne @JoinColumn(name = "patientRecordId")
-    val patientRecord: PatientRecord? = null,
+    var patientRecord: PatientRecord,
 
     @ManyToOne @JoinColumn(name = "laboId")
-    val labo: Labo? = null
+    var labo: Labo
 )

@@ -1,4 +1,4 @@
-package org.vn.dentalClinicMgt.controller.treatment
+package org.vn.dentalClinicMgt.controller
 
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping

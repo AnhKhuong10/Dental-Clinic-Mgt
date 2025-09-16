@@ -1,4 +1,4 @@
-package org.vn.dentalClinicMgt.controller.service
+package org.vn.dentalClinicMgt.controller
 
 import jakarta.validation.Valid
 import org.springframework.data.domain.PageRequest
@@ -11,7 +11,6 @@ import org.vn.dentalClinicMgt.domain.dto.service.ServiceCreateInput
 import org.vn.dentalClinicMgt.domain.dto.service.ServiceDTO
 import org.vn.dentalClinicMgt.domain.dto.service.ServicePage
 import org.vn.dentalClinicMgt.domain.dto.service.ServiceUpdateInput
-import org.vn.dentalClinicMgt.domain.entity.Service
 import org.vn.dentalClinicMgt.service.ServiceService
 import org.vn.dentalClinicMgt.utils.exception.BusinessException
 import org.vn.dentalClinicMgt.utils.exception.ErrorCode

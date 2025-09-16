@@ -1,4 +1,4 @@
-package org.vn.dentalClinicMgt.controller.schedule
+package org.vn.dentalClinicMgt.controller
 
 import org.springframework.data.domain.PageRequest
 import org.springframework.graphql.data.method.annotation.Argument
@@ -10,7 +10,6 @@ import org.vn.dentalClinicMgt.domain.dto.schedule.ScheduleCreateInput
 import org.vn.dentalClinicMgt.domain.dto.schedule.ScheduleDTO
 import org.vn.dentalClinicMgt.domain.dto.schedule.SchedulePage
 import org.vn.dentalClinicMgt.domain.dto.schedule.ScheduleUpdateInput
-import org.vn.dentalClinicMgt.repository.ScheduleRepository
 import org.vn.dentalClinicMgt.service.ScheduleService
 import org.vn.dentalClinicMgt.utils.constants.ScheduleStatus
 import java.time.LocalDate

@@ -1,4 +1,4 @@
-package org.vn.dentalClinicMgt.controller.patientRecordService
+package org.vn.dentalClinicMgt.controller
 
 import org.springframework.data.domain.PageRequest
 import org.springframework.graphql.data.method.annotation.Argument

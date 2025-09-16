@@ -1,0 +1,42 @@
+
+type Labo{
+    laboId: ID,
+    laboName: String,
+    phone: String,
+    isDeleted: Boolean
+}
+
+type LaboDTO{
+    laboId: ID,
+    laboName: String,
+    phone: String,
+}
+
+type LaboPage{
+    content: [LaboDTO!]!
+    totalPages: Int,
+    totalElements: Int,
+    pageNumber: Int,
+    pageSize: Int,
+}
+
+input LaboCreateInput{
+    laboName: String,
+    phone: String
+}
+
+input LaboUpdateInput{
+    laboId: ID,
+    laboName: String,
+    phone: String,
+}
+
+extend type Query {
+    getLaboPage(page: Int!, size: Int!, search: String): LaboPage
+    getLaboDetail(id: ID): LaboDTO
+}
+
+extend type Mutation {
+    createLabo(input: LaboCreateInput): LaboDTO
+    updateLabo(input: LaboUpdateInput): LaboDTO
+}
