@@ -8,8 +8,8 @@ data class Material(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val materialId: Long = 0,
 
-    val materialName: String?,
-    val unit: String?,
-    val amount: Int?,
-    val price: Int?
+    var materialName: String,
+    var unit: String,
+    var amount: Int,
+    var price: Int
 )

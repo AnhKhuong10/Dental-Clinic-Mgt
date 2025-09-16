@@ -169,7 +169,7 @@ CREATE TABLE materialImport (
     date DATE,
     amount INT,
     supplyName VARCHAR(100),
-    totalPrice INT,
+    price INT,
     isDeleted TINYINT DEFAULT 0,
     FOREIGN KEY (materialId) REFERENCES materials(materialId)
 );
@@ -179,7 +179,7 @@ CREATE TABLE materialExport (
     materialId BIGINT,
     patientRecordId BIGINT,
     amount INT,
-    totalPrice INT,
+    price INT,
     isDeleted TINYINT DEFAULT 0,
     FOREIGN KEY (materialId) REFERENCES materials(materialId),
     FOREIGN KEY (patientRecordId) REFERENCES patientRecords(patientRecordId)
