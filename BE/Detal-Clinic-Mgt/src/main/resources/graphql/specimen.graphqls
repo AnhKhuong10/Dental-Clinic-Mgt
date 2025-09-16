@@ -1,0 +1,60 @@
+
+type Specimen{
+    specimenId: ID!
+    specimenName: String
+    receiveDate: Date,
+    deliveryDate: Date,
+    amount: Int,
+    price: Int,
+    patientRecord: PatientRecord,
+    labo: Labo
+}
+
+type SpecimenDTO{
+    specimenId : ID,
+    specimenName : String,
+    patientName: String,
+    laboName: String,
+    receiveDate : Date,
+    deliveryDate : Date,
+    amount: Int,
+    price: Int,
+}
+
+type SpecimenPage{
+    content: [SpecimenDTO!]!
+    totalPages: Int
+    totalElements: Int
+    pageSize: Int
+    pageNumber: Int
+}
+
+input SpecimenCreateInput{
+    specimenName : String,
+    receiveDate : Date,
+    deliveryDate : Date,
+    amount: Int,
+    price: Int,
+    patienRecordId: ID,
+    laboId: ID,
+}
+
+input SpecimenUpdateInput{
+    specimenId : ID,
+    specimenName : String,
+    receiveDate : Date,
+    deliveryDate : Date,
+    amount: Int,
+    price: Int,
+    patienRecordId: ID,
+    laboId: ID,
+}
+
+extend type Query {
+    getSpecimenPage(page:Int!, size: Int!, search: String, fromDate: Date, toDate: Date): SpecimenPage
+}
+
+extend type Mutation {
+    createSpecimen(input: SpecimenCreateInput): SpecimenDTO
+    updateSpecimen(input: SpecimenUpdateInput): SpecimenDTO
+}

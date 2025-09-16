@@ -1,4 +1,4 @@
-package org.vn.dentalClinicMgt.controller.patient
+package org.vn.dentalClinicMgt.controller
 
 import jakarta.validation.Valid
 import org.springframework.data.domain.PageRequest
@@ -11,9 +11,6 @@ import org.vn.dentalClinicMgt.domain.dto.patient.PatientCreateInput
 import org.vn.dentalClinicMgt.domain.dto.patient.PatientDTO
 import org.vn.dentalClinicMgt.domain.dto.patient.PatientPage
 import org.vn.dentalClinicMgt.domain.dto.patient.PatientUpdateInput
-import org.vn.dentalClinicMgt.domain.dto.user.CreateUserInput
-import org.vn.dentalClinicMgt.domain.dto.user.UserDTO
-import org.vn.dentalClinicMgt.domain.dto.user.UserPage
 import org.vn.dentalClinicMgt.service.PatientService
 import org.vn.dentalClinicMgt.utils.constants.GenderEnum
 import org.vn.dentalClinicMgt.utils.constants.PatientStatus

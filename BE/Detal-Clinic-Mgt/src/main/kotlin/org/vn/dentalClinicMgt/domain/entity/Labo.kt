@@ -8,7 +8,7 @@ data class Labo(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val laboId: Long = 0,
 
-    val laboName: String?,
-    val phone: String?,
+    var laboName: String,
+    var phone: String,
     val isDeleted: Boolean = false
 )

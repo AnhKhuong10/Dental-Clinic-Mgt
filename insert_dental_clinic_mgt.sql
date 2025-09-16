@@ -185,5 +185,23 @@ VALUES
 (1, 1, 1, 'PENDING'),
 (2, 1, 2, 'IN_PROGRESS' );
 
+INSERT INTO labos (laboId, laboName, Phone, isDeleted) VALUES
+(1, 'Labo Nha Khoa Việt Mỹ', '0909123456', 0),
+(2, 'Labo Răng Sứ Đông Á', '0912345678', 0),
+(3, 'Labo Kỹ Thuật Số SmileTech', '0988777666', 0),
+(4, 'Labo Răng Hàm Mặt Trung Ương', '02438234567', 0),
+(5, 'Labo Nha Khoa Thẩm Mỹ Sài Gòn', '0933456789', 0);
+
+-- Giả sử đã có patient_record_id = 1, 2
+-- Và labos đã insert từ ví dụ trước
+
+INSERT INTO specimens (specimenId, specimenName, receiveDate, deliveryDate, amount, price, patientRecordId, laboId) VALUES
+(1, 'Dấu hàm răng hàm trên', '2025-09-10', '2025-09-15', 1, 500000, 1, 1),
+(2, 'Dấu hàm răng hàm dưới', '2025-09-10', '2025-09-15', 1, 500000, 1, 1),
+(3, 'Mẫu máu xét nghiệm đường huyết', '2025-09-12', '2025-09-13', 1, 200000, 2, 2),
+(4, 'Mẫu mô nướu sinh thiết', '2025-09-12', '2025-09-20', 1, 800000, 2, 3),
+(5, 'Mẫu scan kỹ thuật số', '2025-09-14', '2025-09-14', 1, 1000000, 1, 3);
+
+
 
 

@@ -1,4 +1,4 @@
-package org.vn.dentalClinicMgt.controller.auth
+package org.vn.dentalClinicMgt.controller
 
 import graphql.schema.DataFetchingEnvironment
 import jakarta.servlet.http.HttpServletRequest
