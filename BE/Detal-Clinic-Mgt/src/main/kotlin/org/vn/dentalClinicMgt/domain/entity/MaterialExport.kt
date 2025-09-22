@@ -3,18 +3,18 @@ package org.vn.dentalClinicMgt.domain.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "material_export")
+@Table(name = "materialexport")
 data class MaterialExport(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val materialExportId: Long = 0,
 
     @ManyToOne @JoinColumn(name = "materialId")
-    val material: Material,
+    var material: Material,
 
     @ManyToOne @JoinColumn(name = "patientRecordId")
-    val patientRecord: PatientRecord,
+    var patientRecord: PatientRecord,
 
-    val amount: Int,
-    val price: Int,
-    val isDeleted: Boolean = false
+    var amount: Int,
+    var price: Int,
+    var isDeleted: Boolean = false
 )
