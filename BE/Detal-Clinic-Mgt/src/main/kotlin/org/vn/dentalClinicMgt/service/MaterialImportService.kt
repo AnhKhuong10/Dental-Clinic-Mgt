@@ -19,6 +19,8 @@ interface MaterialImportService {
         page: Pageable,
     ): Page<MaterialImportDTO>
 
+    fun getMaterialImportDetails(materialImportId: Long): MaterialImportDTO
+
     fun createMaterial(input: MaterialImportCreateInput): MaterialImportDTO
 
     fun updateMaterial(input: MaterialImportUpdateInput): MaterialImportDTO

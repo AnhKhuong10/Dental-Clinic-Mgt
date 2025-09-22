@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.MutationMapping
 import org.springframework.graphql.data.method.annotation.QueryMapping
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Controller
 import org.vn.dentalClinicMgt.domain.dto.labo.LaboPage
 import org.vn.dentalClinicMgt.domain.dto.specimen.SpecimenCreateInput
@@ -20,6 +21,7 @@ class SpecimenQuery (
     val specimenService: SpecimenService
 ){
 
+    @PreAuthorize("hasAuthority('SPECIMEN_VIEW')")
     @QueryMapping
     fun getSpecimenPage(
         @Argument page: Int,
@@ -48,11 +50,13 @@ class SpecimenMutation(
     val specimenService: SpecimenService
 ){
 
+    @PreAuthorize("hasAuthority('SPECIMEN_CREATE')")
     @MutationMapping
     fun createSpecimen(@Argument input: SpecimenCreateInput): SpecimenDTO {
         return specimenService.createSpecimen(input)
     }
 
+    @PreAuthorize("hasAuthority('SPECIMEN_UPDATE')")
     @MutationMapping
     fun updateSpecimen(@Argument input: SpecimenUpdateInput): SpecimenDTO {
         return specimenService.updateSpecimen(input)

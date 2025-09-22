@@ -1,0 +1,56 @@
+type MaterialImport{
+    materialImportId: ID!
+    material: Material
+    date: Date
+    amount: Int
+    supplyName: String
+    price: Int
+    isDeleted: Boolean
+}
+
+type MaterialImportDTO{
+    materialImportId: ID!
+    supplyName: String
+    materialName: String
+    date: Date
+    amount: Int
+    price: Int
+    totalPrice: Int
+}
+
+type MaterialImportPage{
+    content: [MaterialImportDTO!]!
+    totalPages: Int!
+    totalElements: Int!
+    pageNumber: Int!
+    pageSize: Int!
+}
+
+input MaterialImportCreateInput{
+    materialId: ID
+    supplyName: String
+    date: Date
+    amount: Int
+    price: Int
+}
+
+input MaterialImportUpdateInput{
+    materialImportId: ID
+    materialId: ID
+    supplyName: String
+    date: Date
+    amount: Int
+    price: Int
+}
+
+extend type Query {
+    getMaterialImportPage(page: Int!, size: Int!, fromDate:Date, toDate: Date, search: String): MaterialImportPage
+    getMaterialImportDetail(id:ID!): MaterialImportDTO
+}
+
+extend type Mutation {
+    createMaterialImport(input: MaterialImportCreateInput!): MaterialImportDTO
+    updateMaterialImport(input: MaterialImportUpdateInput!): MaterialImportDTO
+    deleteMaterialImport(id: ID): Boolean
+}
+

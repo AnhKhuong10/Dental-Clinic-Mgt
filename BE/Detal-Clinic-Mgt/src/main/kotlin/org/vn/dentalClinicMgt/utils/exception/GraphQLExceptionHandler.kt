@@ -91,7 +91,7 @@ class GraphQLExceptionHandler : DataFetcherExceptionResolverAdapter() {
                         .extensions(
                             mapOf(
                                 "http_code" to 401,
-                                "http_message" to "UNAUTHORIZED",
+                                "http_message" to "UNAUTHENTICATED",
                                 "error_code" to "UNAUTHENTICATED"
                             )
                         )
