@@ -1,0 +1,51 @@
+
+type MaterialExport{
+    materialExportId: ID!,
+    material: Material,
+    patientRecord: PatientRecord,
+    amount: Int,
+    price: Int,
+    isDeleted: Boolean
+}
+
+type MaterialExportDTO{
+    materialExportId: ID!,
+    materialName: String,
+    patientName: String,
+    amount: Int,
+    price: Int,
+    totalPrice: Int,
+    date: Date
+}
+
+type MaterialExportPage{
+    content: [MaterialExportDTO!]!
+    totalPages: Int,
+    totalElements: Int,
+    pageSize: Int,
+    pageNumber: Int
+}
+
+input MaterialExportCreateInput{
+    materialId: ID,
+    patientRecordId: ID,
+    amount: Int
+}
+
+input MaterialExportUpdateInput{
+    materialExportId: ID,
+    materialId: ID,
+    patientRecordId: ID,
+    amount: Int
+}
+
+extend type Query {
+    getMaterialExportPage(page:Int!, size:Int!, search: String, fromDate: Date, toDate: Date): MaterialExportPage
+    getMaterialExportDetail(id: ID): MaterialExportDTO
+}
+
+extend type Mutation {
+    createMaterialExport(input: MaterialExportCreateInput): MaterialExportDTO
+    updateMaterialExport(input: MaterialExportUpdateInput): MaterialExportDTO
+    deleteMaterialExport(id: ID): Boolean
+}

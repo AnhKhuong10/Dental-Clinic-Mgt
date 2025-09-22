@@ -40,7 +40,7 @@ class MaterialImportQuery(
 
     }
 
-    @PreAuthorize("hasAuthority('MATERIAL_IMPORT_DETIAL')")
+    @PreAuthorize("hasAuthority('MATERIAL_IMPORT_DETAIL')")
     @QueryMapping
     fun getMaterialImportDetail(@Argument id: Long): MaterialImportDTO{
 
