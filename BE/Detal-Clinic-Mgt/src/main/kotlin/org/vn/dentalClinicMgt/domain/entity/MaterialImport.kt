@@ -10,12 +10,12 @@ data class MaterialImport(
     val materialImportId: Long = 0,
 
     @ManyToOne @JoinColumn(name = "materialId")
-    val material: Material,
+    var material: Material,
 
-    val date: LocalDate,
-    val amount: Int,
-    val supplyName: String,
-    val price: Int,
-    val isDeleted: Boolean = false
+    var date: LocalDate,
+    var amount: Int,
+    var supplyName: String,
+    var price: Int,
+    var isDeleted: Boolean = false
 )
 
