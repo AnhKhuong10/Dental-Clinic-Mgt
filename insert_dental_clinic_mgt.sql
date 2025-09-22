@@ -50,7 +50,27 @@ INSERT INTO permission (permissionId, permissionName) VALUES
 (22, 'PATIENT_RECORD_SERVICE_CREATE'),
 (23, 'PATIENT_RECORD_SERVICE_INPROGRESS'),
 (24, 'PATIENT_RECORD_SERVICE_DONE'),
-(25, 'PATIENT_RECORD_SERVICE_CANCELLED');
+(25, 'PATIENT_RECORD_SERVICE_CANCELLED'),
+(26, 'LABO_VIEW'),
+(27, 'LABO_CREATE'),
+(28, 'LABO_UPDATE'),
+(29, 'LABO_DETAIL'),
+(30, 'LABO_DELETE'),
+(31, 'SPECIMEN_VIEW'),
+(32, 'SPECIMEN_CREATE'),
+(33, 'SPECIMEN_UPDATE'),
+(34, 'SPECIMEN_DETAIL'),
+(35, 'SPECIMEN_DELETE'),
+(36, 'MATERIAL_VIEW'),
+(37, 'MATERIAL_CREATE'),
+(38, 'MATERIAL_UPDATE'),
+(39, 'MATERIAL_DETAIL'),
+(40, 'MATERIAL_DELETE'),
+(41, 'MATERIAL_IMPORT_VIEW'),
+(42, 'MATERIAL_IMPORT_CREATE'),
+(43, 'MATERIA_IMPORTL_UPDATE'),
+(44, 'MATERIAL_IMPORT_DETAIL'),
+(45, 'MATERIAL_IMPORT_DELETE');
 
 
 -- Map ADMIN -> full quyền
@@ -80,6 +100,26 @@ INSERT INTO rolePermissionMap (roleId, permissionId) VALUES
 (1, 23), -- ADMIN -> PATIENT_RECORD_SERVICE_INPROGRESS
 (1, 24), -- ADMIN -> PATIENT_RECORD_SERVICE_DONE
 (1, 25), -- ADMIN -> PATIENT_RECORD_SERVICE_CANCELLED
+(1, 26), -- ADMIN -> LABO_VIEW
+(1, 27), -- ADMIN -> LABO_CREATE
+(1, 28), -- ADMIN -> LABO_UPDATE
+(1, 29), -- ADMIN -> LABO_DETAIL
+(1, 30), -- ADMIN -> LABO_DELETE
+(1, 31), -- ADMIN -> SPECIMEN_VIEW
+(1, 32), -- ADMIN -> SPECIMEN_CREATE
+(1, 33), -- ADMIN -> SPECIMEN_UPDATE
+(1, 34), -- ADMIN -> SPECIMEN_DETAIL
+(1, 35), -- ADMIN -> SPECIMEN_DELETE
+(1, 36), -- ADMIN -> MATERIAL_VIEW
+(1, 37), -- ADMIN -> MATERIAL_CREATE
+(1, 38), -- ADMIN -> MATERIAL_UPDATE
+(1, 39), -- ADMIN -> MATERIAL_DETAIL
+(1, 40), -- ADMIN -> MATERIAL_DELETE
+(1, 41), -- ADMIN -> MATERIAL_IMPORT_VIEW
+(1, 42), -- ADMIN -> MATERIAL_IMPORT_CREATE
+(1, 43), -- ADMIN -> MATERIAL_IMPORT_UPDATE
+(1, 44), -- ADMIN -> MATERIAL_IMPORT_DETAIL
+(1, 45), -- ADMIN -> MATERIAL_IMPORT_DELETE
 
 (2, 5), -- DOCTOR -> PATIENT_VIEW
 (2, 9), -- DOCTOR -> CATEGORYSERVICE_VIEW
@@ -95,14 +135,41 @@ INSERT INTO rolePermissionMap (roleId, permissionId) VALUES
 (2, 23), -- DOCTOR -> PATIENT_RECORD_SERVICE_INPROGRESS
 (2, 24), -- DOCTOR -> PATIENT_RECORD_SERVICE_DONE
 (2, 25), -- DOCTOR -> PATIENT_RECORD_SERVICE_CANCELLED
+(2, 36), -- DOCTOR -> MATERIAL_VIEW
 
 (3, 5), -- LEADER_NURSE -> PATIENT_VIEW
 (3, 9), -- LEADER_NURSE -> CATEGORYSERVICE_VIEW
+(3, 10), -- LEADER_NURSE -> CATEGORYSERVICE_CREATE
+(3, 11), -- LEADER_NURSE -> CATEGORYSERVICE_UPDATE
 (3, 12), -- LEADER_NURSE -> SERVICE_VIEW
+(3, 13), -- LEADER_NURSE -> SERVICE_CREATE
+(3, 14), -- LEADER_NURSE -> SERVICE_UPDATE
+(3, 36), -- LEADER_NURSE -> MATERIAL_VIEW
+(3, 37), -- LEADER_NURSE -> MATERIAL_CREATE
+(3, 38), -- LEADER_NURSE -> MATERIAL_UPDATE
+(3, 39), -- LEADER_NURSE -> MATERIAL_DETAIL
+(3, 40), -- LEADER_NURSE -> MATERIAL_DELETE
+(3, 41), -- LEADER_NURSE -> MATERIAL_IMPORT_VIEW
+(3, 42), -- LEADER_NURSE -> MATERIAL_IMPORT_CREATE
+(3, 43), -- LEADER_NURSE -> MATERIAL_IMPORT_UPDATE
+(3, 44), -- LEADER_NURSE -> MATERIAL_IMPORT_DETAIL
+(3, 45), -- LEADER_NURSE -> MATERIAL_IMPORT_DELETE
 
 (4, 5), -- NURSE -> PATIENT_VIEW
 (4, 9), -- NURSE -> CATEGORYSERVICE_VIEW
 (4, 12), -- NURSE -> SERVICE_VIEW
+(4, 26), -- NURSE -> LABO_VIEW
+(4, 27), -- NURSE -> LABO_CREATE
+(4, 28), -- NURSE -> LABO_UPDATE
+(4, 29), -- NURSE -> LABO_DETAIL
+(4, 30), -- NURSE -> LABO_DELETE
+(4, 31), -- NURSE -> SPECIMEN_VIEW
+(4, 32), -- NURSE -> SPECIMEN_CREATE
+(4, 33), -- NURSE -> SPECIMEN_UPDATE
+(4, 34), -- NURSE -> SPECIMEN_DETAIL
+(4, 35), -- NURSE -> SPECIMEN_DELETE
+(4, 36), -- NURSE -> MATERIAL_VIEW
+(4, 41), -- NURSE -> MATERIAL_IMPORT_VIEW
 
 (5, 5), -- RECEPTIONIST -> PATIENT_VIEW
 (5, 6), -- RECEPTIONIST -> PATIENT_CREATE
@@ -202,27 +269,43 @@ INSERT INTO specimens (specimenId, specimenName, receiveDate, deliveryDate, amou
 (4, 'Mẫu mô nướu sinh thiết', '2025-09-12', '2025-09-20', 1, 800000, 2, 3),
 (5, 'Mẫu scan kỹ thuật số', '2025-09-14', '2025-09-14', 1, 1000000, 1, 3);
 
-INSERT INTO materials (materialName, unit, amount, price) VALUES
-('Găng tay y tế', 'hộp', 0, 50000),
-('Khẩu trang y tế', 'hộp', 0, 40000),
-('Khẩu trang N95', 'cái', 0, 20000),
-('Kim tiêm', 'hộp', 0, 70000),
-('Ống tiêm 5ml', 'cái', 0, 5000),
-('Ống tiêm 10ml', 'cái', 0, 7000),
-('Chỉ nha khoa', 'cuộn', 0, 15000),
-('Nước súc miệng sát khuẩn', 'chai', 0, 60000),
-('Cồn y tế 70 độ', 'chai', 0, 35000),
-('Dung dịch sát khuẩn tay nhanh', 'chai', 0, 25000),
-('Thuốc gây tê Lidocaine', 'lọ', 0, 80000),
-('Thuốc kháng sinh Amoxicillin', 'vỉ', 0, 55000),
-('Xi măng nha khoa', 'gram', 0, 2000),
-('Thạch cao nha khoa', 'kg', 0, 150000),
-('Găng tay phẫu thuật vô trùng', 'đôi', 0, 10000),
-('Bông gòn y tế', 'kg', 0, 90000),
-('Gạc vô trùng', 'túi', 0, 45000),
-('Khăn trải phẫu thuật', 'cái', 0, 70000),
-('Mặt nạ phẫu thuật', 'cái', 0, 35000),
-('Ống hút nha khoa', 'túi', 0, 30000);
+INSERT INTO dental_clinic_mgt.materials
+(materialId, materialName, unit, amount, price)
+VALUES
+(1, 'Găng tay y tế', 'hộp', 100, 50000),
+(2, 'Khẩu trang y tế', 'hộp', 100, 40000),
+(3, 'Khẩu trang N95', 'cái', 50, 20000),
+(4, 'Kim tiêm', 'cái', 80, 70000),
+(5, 'Ống tiêm 5ml', 'cái', 150, 5000),
+(6, 'Ống tiêm 10ml', 'cái', 250, 7000),
+(7, 'Chỉ nha khoa', 'cuộn', 100, 15000),
+(8, 'Nước súc miệng sát khuẩn', 'chai', 60, 60000),
+(9, 'Cồn y tế 70 độ', 'chai', 90, 35000),
+(10, 'Dung dịch sát khuẩn tay nhanh', 'chai', 150, 25000);
+
+
+INSERT INTO dental_clinic_mgt.materialimport
+(materialImportId, materialId, date, amount, supplyName, price, isDeleted)
+VALUES
+(1, 1, '2025-09-01', 50, 'NCC A', 50000, 0),
+(2, 1, '2025-09-10', 50, 'NCC B', 50000, 0),
+
+(3, 2, '2025-09-05', 100, 'NCC A', 40000, 0),
+
+(4, 3, '2025-09-07', 50, 'NCC C', 20000, 0),
+
+(5, 4, '2025-09-08', 80, 'NCC D', 70000, 0),
+
+(6, 5, '2025-09-02', 150, 'NCC B', 5000, 0),
+
+(7, 6, '2025-09-03', 250, 'NCC B', 7000, 0),
+
+(8, 7, '2025-09-09', 100, 'NCC E', 15000, 0),
+
+(9, 8, '2025-09-06', 60, 'NCC F', 60000, 0),
+
+(10, 9, '2025-09-04', 90, 'NCC A', 35000, 0);
+
 
 
 

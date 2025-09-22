@@ -12,22 +12,21 @@ import java.time.LocalDate
 @Repository
 interface MaterialImportRepository : JpaRepository<MaterialImport, Long> {
 
-    @Query(
-        """
+    @Query("""
             SELECT m FROM MaterialImport m
-            join m.material ma
-            WHERE m.isDeleted = false 
-                AND(:search IS NULL 
-                   OR LOWER(m.supplyName) LIKE LOWER(CONCAT('%',:search,'%'))
-                    OR LOWER(ma.materialName) LIKE LOWER(CONCAT('%',:search,'%')))
-                AND (:fromDate IS NULL OR m.date >= :fromDate)
-                AND (:toDate IS NULL OR m.date <= :toDate)
-        """
-    )
+            JOIN m.material ma
+            WHERE (:showDeleted = true OR m.isDeleted = false)
+            AND (:search IS NULL 
+                 OR LOWER(m.supplyName) LIKE LOWER(CONCAT('%',:search,'%'))
+                 OR LOWER(ma.materialName) LIKE LOWER(CONCAT('%',:search,'%')))
+            AND (:fromDate IS NULL OR m.date >= :fromDate)
+            AND (:toDate IS NULL OR m.date <= :toDate)
+        """)
     fun getListMaterialsImport(
         @Param("search") search: String?,
         @Param("fromDate") fromDate: LocalDate?,
         @Param("toDate") toDate: LocalDate?,
+        @Param("showDeleted") showDeleted: Boolean,
         pageable: Pageable
     ) : Page<MaterialImport>
 

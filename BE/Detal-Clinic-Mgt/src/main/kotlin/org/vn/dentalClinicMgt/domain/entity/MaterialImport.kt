@@ -4,7 +4,7 @@ import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
-@Table(name = "material_import")
+@Table(name = "materialimport")
 data class MaterialImport(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val materialImportId: Long = 0,

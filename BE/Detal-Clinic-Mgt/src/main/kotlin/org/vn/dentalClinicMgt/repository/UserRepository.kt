@@ -37,5 +37,4 @@ interface UserRepository : JpaRepository<User, Long> {
         @Param("refreshToken") refreshToken: String,
         @Param("username") username: String
     ): User?
-
 }

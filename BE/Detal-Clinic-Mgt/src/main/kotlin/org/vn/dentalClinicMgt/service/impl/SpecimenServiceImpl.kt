@@ -41,7 +41,7 @@ class SpecimenServiceImpl(
 
         val labo = laboRepository.findById(input.laboId)
             .orElseThrow{
-                BusinessException(ErrorCode.NOT_FOUND,"Lobo not found")
+                BusinessException(ErrorCode.NOT_FOUND,"Labo not found")
             }
 
         val specimen = Specimen(
