@@ -203,26 +203,26 @@ INSERT INTO specimens (specimenId, specimenName, receiveDate, deliveryDate, amou
 (5, 'Mẫu scan kỹ thuật số', '2025-09-14', '2025-09-14', 1, 1000000, 1, 3);
 
 INSERT INTO materials (materialName, unit, amount, price) VALUES
-('Găng tay y tế', 'hộp', 100, 50000),
-('Khẩu trang y tế', 'hộp', 200, 40000),
-('Khẩu trang N95', 'cái', 150, 20000),
-('Kim tiêm', 'hộp', 80, 70000),
-('Ống tiêm 5ml', 'cái', 300, 5000),
-('Ống tiêm 10ml', 'cái', 250, 7000),
-('Chỉ nha khoa', 'cuộn', 120, 15000),
-('Nước súc miệng sát khuẩn', 'chai', 60, 60000),
-('Cồn y tế 70 độ', 'chai', 90, 35000),
-('Dung dịch sát khuẩn tay nhanh', 'chai', 150, 25000),
-('Thuốc gây tê Lidocaine', 'lọ', 50, 80000),
-('Thuốc kháng sinh Amoxicillin', 'vỉ', 70, 55000),
-('Xi măng nha khoa', 'gram', 500, 2000),
-('Thạch cao nha khoa', 'kg', 40, 150000),
-('Găng tay phẫu thuật vô trùng', 'đôi', 300, 10000),
-('Bông gòn y tế', 'kg', 30, 90000),
-('Gạc vô trùng', 'túi', 100, 45000),
-('Khăn trải phẫu thuật', 'cái', 40, 70000),
-('Mặt nạ phẫu thuật', 'cái', 60, 35000),
-('Ống hút nha khoa', 'túi', 200, 30000);
+('Găng tay y tế', 'hộp', 0, 50000),
+('Khẩu trang y tế', 'hộp', 0, 40000),
+('Khẩu trang N95', 'cái', 0, 20000),
+('Kim tiêm', 'hộp', 0, 70000),
+('Ống tiêm 5ml', 'cái', 0, 5000),
+('Ống tiêm 10ml', 'cái', 0, 7000),
+('Chỉ nha khoa', 'cuộn', 0, 15000),
+('Nước súc miệng sát khuẩn', 'chai', 0, 60000),
+('Cồn y tế 70 độ', 'chai', 0, 35000),
+('Dung dịch sát khuẩn tay nhanh', 'chai', 0, 25000),
+('Thuốc gây tê Lidocaine', 'lọ', 0, 80000),
+('Thuốc kháng sinh Amoxicillin', 'vỉ', 0, 55000),
+('Xi măng nha khoa', 'gram', 0, 2000),
+('Thạch cao nha khoa', 'kg', 0, 150000),
+('Găng tay phẫu thuật vô trùng', 'đôi', 0, 10000),
+('Bông gòn y tế', 'kg', 0, 90000),
+('Gạc vô trùng', 'túi', 0, 45000),
+('Khăn trải phẫu thuật', 'cái', 0, 70000),
+('Mặt nạ phẫu thuật', 'cái', 0, 35000),
+('Ống hút nha khoa', 'túi', 0, 30000);
 
 
 
