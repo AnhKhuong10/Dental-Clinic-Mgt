@@ -54,7 +54,7 @@ class PatientRecordServiceImpl (
                 note = input.note,
                 prescription = input.prescription,
                 treatment = treatment,
-                user = doctor
+                user = doctor,
             )
         )
         return record.toDTO()

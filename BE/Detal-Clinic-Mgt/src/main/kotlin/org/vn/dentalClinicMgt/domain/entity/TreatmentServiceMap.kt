@@ -15,7 +15,7 @@ data class TreatmentServiceMap(
     val service: Service? = null,
 
     val currentPrice: Int,
-    val discount: Int?,
+    val discount: Int,
 
     @ManyToOne @JoinColumn(name = "startPatientRecordId")
     val startRecord: PatientRecord? = null

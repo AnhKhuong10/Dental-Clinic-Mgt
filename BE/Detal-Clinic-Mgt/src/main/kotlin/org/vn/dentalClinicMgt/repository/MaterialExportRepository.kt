@@ -39,4 +39,6 @@ interface MaterialExportRepository : JpaRepository<MaterialExport, Long> {
         page: Pageable,
     ) : Page<MaterialExport>
 
+    @Query("SELECT m FROM MaterialExport m WHERE m.patientRecord.patientRecordId = :patientRecordId")
+    fun findByPatientRecordId(@Param("patientRecordId") patientRecordId: Long): List<MaterialExport>
 }

@@ -1,0 +1,32 @@
+type ReceiptDetail{
+    receiptDetailId: ID,
+    receipt: Receipt,
+    itemType: String,
+    itemName: String,
+    quantity: Int,
+    unitPrice: Int,
+    totalPrice: Int,
+}
+
+type ReceiptDetailDTO{
+    receiptDetailId : ID,
+    receiptId: ID,
+    itemType: String,
+    itemName: String,
+    quantity: Int,
+    unitPrice: Int,
+    totalPrice: Int,
+}
+
+type ReceiptDetailPage{
+    content: [ReceiptDetailDTO!]!,
+    totalPages: Int,
+    totalElements: Int,
+    pageSize: Int,
+    pageNumber: Int
+}
+
+extend type Query{
+    getReceiptDetailPage(page:Int!, size: Int!, search: String): ReceiptDetailPage
+    getReceiptDetailByReceiptId(page:Int!, size: Int!, receiptId: ID): ReceiptDetailPage
+}

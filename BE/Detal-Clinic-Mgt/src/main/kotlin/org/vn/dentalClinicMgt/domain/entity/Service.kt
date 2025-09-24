@@ -16,4 +16,5 @@ data class Service(
 
     @ManyToOne @JoinColumn(name = "categoryServiceId")
     var categoryService: CategoryService
+
 )

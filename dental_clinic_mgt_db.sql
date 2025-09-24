@@ -122,6 +122,7 @@ CREATE TABLE patientRecordServiceMap (
     patientRecordId BIGINT,
     serviceId BIGINT,
     status VARCHAR(255),
+    isPaid TINYINT DEFAULT 0,
     FOREIGN KEY (patientRecordId) REFERENCES patientRecords(patientRecordId),
     FOREIGN KEY (serviceId) REFERENCES services(serviceId)
 );
@@ -144,12 +145,32 @@ CREATE TABLE treatmentServiceMap (
 -- =====================
 CREATE TABLE receipts (
     receiptId BIGINT AUTO_INCREMENT PRIMARY KEY,
-    patientId BIGINT,
-    paymentDate DATE,
+    treatmentId BIGINT,
+    patientRecordId BIGINT,
+    price INT,
+    discount INT, 
+    totalPrice INT,
+    payment INT,
+    date DATE,
     debit INT,
-    credit INT,
-    status VARCHAR(45),
-    FOREIGN KEY (patientId) REFERENCES patients(patientId)
+    paymentType VARCHAR(255),
+    FOREIGN KEY (treatmentId) REFERENCES treatments(treatmentId),
+	FOREIGN KEY (patientRecordId) REFERENCES patientRecords(patientRecordId)
+);
+
+-- =====================
+-- RECEIPTSDETAIL
+-- =====================
+
+CREATE TABLE receiptdetail (
+    receiptDetailId BIGINT AUTO_INCREMENT PRIMARY KEY,
+    receiptId BIGINT,
+    itemType NVARCHAR(255),
+    itemName NVARCHAR(255),
+    quantity INT,
+    unitPrice INT,
+    totalPrice INT,
+    FOREIGN KEY (receiptId) REFERENCES receipts(receiptId)
 );
 
 -- =====================

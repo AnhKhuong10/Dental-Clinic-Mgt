@@ -48,31 +48,26 @@ class ScheduleMutation(
     val scheduleService: ScheduleService
 ){
 
-    @PreAuthorize("hasAuthority('SCHEDULE_CREATE')")
     @MutationMapping
     fun createSchedule(@Argument input: ScheduleCreateInput): ScheduleDTO {
         return scheduleService.createSchedule(input)
     }
 
-    @PreAuthorize("hasAuthority('SCHEDULE_UPDATE')")
     @MutationMapping
     fun updateSchedule(@Argument input: ScheduleUpdateInput): ScheduleDTO {
         return scheduleService.updateSchedule(input)
     }
 
-    @PreAuthorize("hasAuthority('SCHEDULE_JOIN')")
     @MutationMapping
     fun joinSchedule(@Argument scheduleId: Long): ScheduleDTO {
         return scheduleService.joinSchedule(scheduleId)
     }
 
-    @PreAuthorize("hasAuthority('SCHEDULE_COMPLETE')")
     @MutationMapping
     fun completeSchedule(@Argument scheduleId: Long): ScheduleDTO {
         return scheduleService.completeSchedule(scheduleId)
     }
 
-    @PreAuthorize("hasAuthority('SCHEDULE_CANCEL')")
     @MutationMapping
     fun cancelSchedule(@Argument scheduleId: Long): ScheduleDTO {
         return scheduleService.cancelSchedule(scheduleId)

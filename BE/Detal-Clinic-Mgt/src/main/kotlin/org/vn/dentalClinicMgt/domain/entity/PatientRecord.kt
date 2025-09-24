@@ -22,5 +22,14 @@ data class PatientRecord(
     @ManyToOne @JoinColumn(name = "treatmentId")
     var treatment: Treatment,
     @ManyToOne @JoinColumn(name = "userId")
-    var user: User
+    var user: User,
+
+    @OneToMany(mappedBy = "patientRecord", cascade = [CascadeType.ALL])
+    val materialExport: List<MaterialExport> = mutableListOf(),
+
+    @OneToMany(mappedBy = "patientRecord", cascade = [CascadeType.ALL])
+    val patientRecordServiceMap: List<PatientRecordServiceMap> = mutableListOf(),
+
+    @OneToMany(mappedBy = "patientRecord", cascade = [CascadeType.ALL])
+    val receipts: List<Receipt> = mutableListOf()
 )
