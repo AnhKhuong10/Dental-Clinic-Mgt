@@ -18,7 +18,7 @@ data class Patient(
     @Enumerated(EnumType.STRING) // Lưu enum dạng text
     var gender: GenderEnum? = null,
     var address: String?,
-    var phone: String?,
+    var phone: String,
     var email: String?,
     var bodyPrehistory: String?,
     var teethPrehistory: String?,
@@ -29,4 +29,6 @@ data class Patient(
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     val treatments: MutableList<Treatment> = mutableListOf(),
 
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val schedules: MutableList<Schedule> = mutableListOf()
 )

@@ -9,6 +9,7 @@ import org.vn.dentalClinicMgt.domain.entity.PatientRecordServiceMap
 import org.vn.dentalClinicMgt.repository.PatientRecordRepository
 import org.vn.dentalClinicMgt.repository.PatientRecordServiceMapRepository
 import org.vn.dentalClinicMgt.repository.ServiceRepository
+import org.vn.dentalClinicMgt.repository.TreatmentServiceMapRepository
 import org.vn.dentalClinicMgt.service.PatientRecordServiceMapService
 import org.vn.dentalClinicMgt.utils.constants.PatientRecordServiceStatus
 import org.vn.dentalClinicMgt.utils.exception.BusinessException
@@ -18,7 +19,8 @@ import org.vn.dentalClinicMgt.utils.exception.ErrorCode
 class PatientRecordServiceMapServiceImpl (
     private val patientRecordServiceMapRepository: PatientRecordServiceMapRepository,
     private val patientRecordRepository: PatientRecordRepository,
-    private val serviceRepository: ServiceRepository
+    private val serviceRepository: ServiceRepository,
+    private val treatmentServiceMapRepository: TreatmentServiceMapRepository
 ) : PatientRecordServiceMapService {
 
     override fun listPatientRecordService(pageable: Pageable): Page<PatientRecordServiceMapDTO> {
@@ -37,6 +39,16 @@ class PatientRecordServiceMapServiceImpl (
                 throw BusinessException(
                     ErrorCode.BAD_REQUEST,
                     "Service with id $serviceId already exists in PatientRecord ${input.patientRecordId}."
+                )
+            }
+
+            // Check service có thuộc treatment không
+            if (!treatmentServiceMapRepository.existsByTreatmentTreatmentIdAndServiceServiceId(
+                    patientRecord.treatment.treatmentId, serviceId
+                )) {
+                throw BusinessException(
+                    ErrorCode.BAD_REQUEST,
+                    "Service $serviceId does not belong to Treatment ${patientRecord.treatment.treatmentId}"
                 )
             }
         }

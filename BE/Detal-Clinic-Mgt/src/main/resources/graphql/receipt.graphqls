@@ -1,0 +1,57 @@
+
+type Receipt{
+    receiptId: ID,
+    treatment: Treatment,
+    patientRecord: PatientRecord,
+    price: Int,
+    discount: Int,
+    totalPrice: Int,
+    payment: Int,
+    date: Date,
+    debit: Int,
+    paymentType: PaymentType
+}
+
+enum PaymentType{
+    PER_TREATMENT,
+    PER_RECORD
+}
+
+type ReceiptDTO{
+    receiptId: ID,
+    patientName: String,
+    patientPhone: String,
+    treatmentId: ID,
+    treatmentName: String,
+    price: Int,
+    discount: Int,
+    totalPrice: Int,
+    payment: Int,
+    date: Date,
+    debit: Int,
+    paymentType: PaymentType
+}
+
+type ReceiptPage{
+    content: [ReceiptDTO!]!,
+    totalPages: Int,
+    totalElements: Int,
+    pageSize: Int,
+    pageNumber: Int
+}
+
+input ReceiptCreateInput{
+    treatmentId: ID,
+    patientRecordId: ID,
+    paymentType: PaymentType,
+    payment: Int
+}
+
+extend type Query {
+    getReceiptPage(page:Int!, size: Int!, search: String, fromDate: Date, toDate: Date, paymentType: PaymentType): ReceiptPage
+    getReceiptDetail(id: ID): ReceiptDTO
+}
+
+extend type Mutation {
+    createReceipt(input: ReceiptCreateInput): ReceiptDTO
+}

@@ -10,7 +10,7 @@ data class Timekeeping(
     val timekeepingId: Long = 0,
 
     @ManyToOne @JoinColumn(name = "userId")
-    val user: User? = null,
+    val user: User,
 
     val timeCheck: LocalDateTime?,
     val timeCheckout: LocalDateTime?

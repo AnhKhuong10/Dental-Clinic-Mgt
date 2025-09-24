@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 import org.vn.dentalClinicMgt.domain.entity.PatientRecordServiceMap
 
@@ -26,4 +27,9 @@ interface PatientRecordServiceMapRepository : JpaRepository<PatientRecordService
             """
         )
     fun existsByPatientRecordIdAndServiceId(patientRecordId: Long, serviceId: Long): Boolean
+
+    @Query("SELECT p FROM PatientRecordServiceMap p WHERE p.patientRecord.patientRecordId = :patientRecordId")
+    fun findByPatientRecordId(@Param("patientRecordId") patientRecordId: Long): List<PatientRecordServiceMap>
+
+
 }

@@ -28,7 +28,7 @@ class UserServiceImpl (
 
     override fun validateUserLogin(username: String, password: String): User {
         val user = userRepository.findByUsername(username)
-            .orElseThrow { BusinessException(ErrorCode.NOT_FOUND, "User not found", "USER_NOT_FOUND") }
+            .orElseThrow { BusinessException(ErrorCode.UNAUTHORIZED, "Invalid credentials", "INVALID_LOGIN") }
         if (!passwordEncoder.matches(password, user.password)) {
             throw BusinessException(ErrorCode.UNAUTHORIZED, "Invalid credentials", "INVALID_LOGIN")
         }

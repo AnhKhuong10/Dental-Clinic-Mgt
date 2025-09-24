@@ -16,6 +16,8 @@ data class PatientRecordServiceMap(
     val service: Service,
 
     @Enumerated(EnumType.STRING)
-    var status: PatientRecordServiceStatus
+    var status: PatientRecordServiceStatus,
+
+    var isPaid: Boolean = false
 )
 
